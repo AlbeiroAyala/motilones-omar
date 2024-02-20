@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebaseConfig : {
-    apiKey: "AIzaSyCW7sZrFFbVtCNftNmhdlFHXsk-jh6o4LI",
-    authDomain: "greenhousseweb.firebaseapp.com",
-    projectId: "greenhousseweb",
-    storageBucket: "greenhousseweb.appspot.com",
-    messagingSenderId: "105586037829",
-    appId: "1:105586037829:web:6624f0ab6ad34fd2f37f2c",
-    measurementId: "G-G7B8RH27R5"
+    apiKey: "AIzaSyBpjKT6do7Z4r3x0xQgSvoj3jFvs1SHOII",
+  authDomain: "app-motilonesomar.firebaseapp.com",
+  projectId: "app-motilonesomar",
+  storageBucket: "app-motilonesomar.appspot.com",
+  messagingSenderId: "753345853538",
+  appId: "1:753345853538:web:642171abea07ac5382f93b",
+  measurementId: "G-VQ4R06G2MR"
   },
     dataApp: {
     nombreApp: 'Extra rapido los Motilones S A',
