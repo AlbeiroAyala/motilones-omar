@@ -32,4 +32,31 @@ export class UiService {
  async  hideLoading(){
      await this.loadingCtrl.dismiss({});    
   }
+  
+  async alertOfOn(titulo: string, msg: string){
+    const alert = await this.alertController.create({
+      header: titulo,  
+      message: msg,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {           
+          },
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirm',
+          handler: () => {
+          },
+        },
+      ],
+      mode:'ios' 
+    });
+    await alert.present();    
+    const res = await alert.onDidDismiss();    
+    return res.role === 'confirm'? true: false;    
+  }
+  
+  
 }

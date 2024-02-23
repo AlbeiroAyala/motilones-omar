@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { UiService } from '../servicios/ui.service';
+import { AuthService } from '../servicios/auth.service';
+import { User } from '../interfaces/pipes/interfaces';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +14,35 @@ import { IonicModule } from '@ionic/angular';
   imports: [ IonicModule, CommonModule, RouterModule]
 })
 export class HomeComponent  implements OnInit {
+   user!: User;
+  constructor(  private router: Router, private ui: UiService, private auth: AuthService) { }
 
-  constructor() { }
+  ngOnInit() {
+   this.user=  this.router.getCurrentNavigation()?.extras?.state?.['userdb'];
+  
 
-  ngOnInit() {}
+  }
+  
+   async navigateGo(url: string){      
+        try {
+          await this.router.navigateByUrl(`/home/${url}`  )
+        } catch (error: any) {
+           await this.ui.alert('Error', 'Intentalo de Nuevo');
+        }      
+   }
+   
+  async  doLogout(){
+    const res=  await this.ui.alertOfOn('Cerrar Sesion !','');
+    if(res){
+      try {  
+         await  this.auth.logout();
+         await this.router.navigateByUrl('/');
+        } catch (error) {
+          await this.ui.alert('Error', 'Intentalo de Nuevo');
+        }
+      }
+    }
+   
+   
 
 }

@@ -1,14 +1,26 @@
 import {Router, Routes} from '@angular/router'
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 export const route: Routes = [
-      {
-         path: 'dashboard',
-         loadComponent : ()=> import( './dashboard/dashboard.component').then( m=> m.DashboardComponent) 
-      },
+     
       {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
+        loadComponent : ()=> import('./home.component').then( c=>c.HomeComponent),
+        children: [
+          {          
+              path: 'dashboard',
+              loadComponent : ()=> import( './dashboard/dashboard.component').then( m=> m.DashboardComponent)           
+          },
+           {
+            path: '',
+            pathMatch: 'full',
+            redirectTo : 'dashboard'
+           },
+           {
+            path: 'usuarios',
+            loadComponent : ()=> import( './usuarios/usuarios.component').then( c=>UsuariosComponent)
+           }
+        ]
       },
 ]
