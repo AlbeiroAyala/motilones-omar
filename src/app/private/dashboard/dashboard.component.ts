@@ -17,7 +17,7 @@ export class DashboardComponent  implements OnInit {
   constructor(private auth: AuthService,private router: Router, private ui: UiService) { }
 
   ngOnInit() {}
-  
+
   async cerrarSesion(){
     try {
       await  this.auth.logout();

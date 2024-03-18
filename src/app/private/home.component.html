@@ -1,64 +1,61 @@
 
 
 
- <ion-split-pane when="xs"  contentId="main-content">
+ <ion-split-pane contentId="main-content">
     <ion-menu  contentId="main-content">
-      <ion-header >
-        <ion-toolbar color="alto" >
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">  </ion-content>
+        <ion-header>
+            <ion-toolbar color="alto">
+                <div class="div-img">
+                    <img class="img-fluid" src="../../assets/admin.png" alt="">
+                </div>
+            </ion-toolbar>
+          </ion-header>
+      <ion-content>
+
+
+               <ul class="list-group" style="margin-top: 10px;">
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('dashboard')" >
+                      <div class="div-center">
+                          <ion-icon name="apps-outline"></ion-icon>   <span > DASHBOARD </span>
+                      </div>
+                  </li>
+
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
+                      <div class="div-center">
+                          <ion-icon name="people-circle-outline"></ion-icon>   <span >USUARIOS</span>
+                      </div>
+                  </li>
+
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
+                      <div class="div-center">
+                          <ion-icon name="desktop-outline"></ion-icon>   <span >EQUIPOS</span>
+                      </div>
+                  </li>
+                  <li  *ngIf="user?.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
+                      <div class="div-center">
+                          <ion-icon name="cog-outline"></ion-icon>  <span >ACCESORIOS</span>
+                      </div>
+                  </li>
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('hgdajsdga')" >
+                      <div class="div-center">
+                          <ion-icon name="folder-open-outline"></ion-icon>  <span >INFORMES</span>
+                      </div>
+                  </li>
+                  <li style="margin-top: 20px;" class="list-group-item list-group-item-action"  (click)="doLogout()" >
+                      <div class="div-center">
+                          <ion-icon style="color:rgb(226, 5, 5)" name="power-outline"></ion-icon> <span style="color: red;" >CERRAR SESION</span>
+                      </div>
+                  </li>
+
+       </ul>
+
+
+
+
+         </ion-content>
     </ion-menu>
-  
-    <div class="ion-page" id="main">
-      <ion-header>
-        <ion-toolbar color="alto">
-            <div class="div-img">
-                <img class="img-fluid" src="../../assets/logofb.png" alt="">
-            </div>        
-        </ion-toolbar>
-      </ion-header>
-        <ion-content >            
-         <ul class="list-group">                      
-            <li class="list-group-item list-group-item-action" (click)="navigateGo('dashboard')" >                       
-                <div class="div-center">                            
-                    <ion-icon name="apps-outline"></ion-icon>   <span > DASHBOARD </span>
-                </div>                    
-            </li>
-                    
-            <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >                       
-                <div class="div-center">                            
-                    <ion-icon name="people-circle-outline"></ion-icon>   <span >USUARIOS</span>
-                </div>                    
-            </li>
-            
-            <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >                       
-                <div class="div-center">                            
-                    <ion-icon name="desktop-outline"></ion-icon>   <span >EQUIPOS</span>
-                </div>                    
-            </li>
-            <li  *ngIf="user.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >                       
-                <div class="div-center">                            
-                    <ion-icon name="cog-outline"></ion-icon>  <span >ACCESORIOS</span>
-                </div>                    
-            </li>
-            <li class="list-group-item list-group-item-action" (click)="navigateGo('hgdajsdga')" >                       
-                <div class="div-center">                            
-                    <ion-icon name="folder-open-outline"></ion-icon>  <span >INFORMES</span>
-                </div>                    
-            </li>
-            <li style="margin-top: 20px;" class="list-group-item list-group-item-action"  (click)="doLogout()" >                       
-                <div class="div-center">                            
-                    <ion-icon style="color:rgb(90, 5, 5)" name="power-outline"></ion-icon> <span >CERRAR SESION</span>
-                </div>                    
-            </li>
-            
- </ul>
-            
-            
-            </ion-content>
-    </div>
+
+
     <ion-router-outlet id="main-content" ></ion-router-outlet>
   </ion-split-pane>
 

@@ -12,6 +12,11 @@ import {  AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {  AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {  AngularFireStorageModule } from '@angular/fire/compat/storage'
 
+import { getAuth, provideAuth } from '@angular/fire/auth';
+
+import { getStorage, provideStorage } from '@angular/fire/storage';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+
 if (environment.production) {
   enableProdMode();
 }
@@ -20,7 +25,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({}),
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
      AngularFireModule.initializeApp(environment.firebaseConfig),
+     provideAuth(() => getAuth()),
      AngularFireAuthModule,
      AngularFirestoreModule,
      AngularFireStorageModule,
@@ -28,3 +35,5 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
   ],
 });
+
+

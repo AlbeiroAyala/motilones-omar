@@ -2,7 +2,7 @@ import { User } from "../interfaces/pipes/interfaces";
 
 
 export class OrmDb {
-    
+
     public createUser (){
          const data: User={
             nombres: 'Omar Contreras',
@@ -17,9 +17,12 @@ export class OrmDb {
             cedula: 8834364646,
             token: '',
             ultimaVez: Date.now(),
-            avatar: ''
+            avatar: '',
+            profesion: 'ingeniero',
+
          }
          return data
     }
-    
+
+
 }

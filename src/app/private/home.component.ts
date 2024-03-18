@@ -17,24 +17,30 @@ export class HomeComponent  implements OnInit {
    user!: User;
   constructor(  private router: Router, private ui: UiService, private auth: AuthService) { }
 
-  ngOnInit() {
-   this.user=  this.router.getCurrentNavigation()?.extras?.state?.['userdb'];
-  
+ async  ngOnInit() {
 
+   this.user=  this.router.getCurrentNavigation()?.extras?.state?.['userdb'];
+   if(!this.user){
+      //console.log('ingreso')
+      this.user = await this.ui.getDataLocalstorage('user');
+
+   }
   }
-  
-   async navigateGo(url: string){      
+
+
+
+   async navigateGo(url: string){
         try {
           await this.router.navigateByUrl(`/home/${url}`  )
         } catch (error: any) {
            await this.ui.alert('Error', 'Intentalo de Nuevo');
-        }      
+        }
    }
-   
+
   async  doLogout(){
     const res=  await this.ui.alertOfOn('Cerrar Sesion !','');
     if(res){
-      try {  
+      try {
          await  this.auth.logout();
          await this.router.navigateByUrl('/');
         } catch (error) {
@@ -42,7 +48,7 @@ export class HomeComponent  implements OnInit {
         }
       }
     }
-   
-   
+
+
 
 }

@@ -16,9 +16,9 @@ import { UiService } from 'src/app/servicios/ui.service';
   styleUrls: ['./login.component.scss'],
   standalone: true,
   imports: [IonicModule, RouterLink, ReactiveFormsModule
-  
-  
-  
+
+
+
   ],
 })
 export class LoginComponent  implements OnInit {
@@ -27,67 +27,68 @@ export class LoginComponent  implements OnInit {
   formLogin!: FormGroup;
   user: any
   stop= new Subject<void>();
- constructor(private router: Router, private auth: AuthService, private ui: UiService, private db: DbService ) { 
-  
-  
+ constructor(private router: Router, private auth: AuthService, private ui: UiService, private db: DbService ) {
+
+
    this.formLogin = new FormGroup({
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
    })
  }
 
-async  ngOnInit() { 
-   
- }
- 
+async  ngOnInit() {
 
- 
+ }
+
+
+
 async  doLogin(){
    if(this.formLogin.valid){
-      const claves : loginAuth = this.formLogin.value as loginAuth;  
+      const claves : loginAuth = this.formLogin.value as loginAuth;
        try {
          await this.ui.showLoading('Validando Credenciales')
-         const user =await this.auth.loginDb(claves);      
+         const user =await this.auth.loginDb(claves);
           if(user.user){
            //console.log(user.user?.uid)
-            const userUid= user.user.uid as string;          
-             this.db.getUser(userUid).pipe( takeUntil(this.stop)) .subscribe(async (datos)=>{  
-                  await this.ui.hideLoading();             
+            const userUid= user.user.uid as string;
+             this.db.getUser(userUid).pipe( takeUntil(this.stop)) .subscribe(async (datos)=>{
+                  await this.ui.hideLoading();
                   if(!datos.exists){
-                      await this.auth.logout();                    
+                      await this.auth.logout();
                      return
-                  }                  
-                  const userdb= datos.data();                 
+                  }
+                  const userdb= datos.data();
+                  await  this.ui.setDataLocalstorage('user', userdb)
                   await this.router.navigateByUrl('/home', { state : { userdb}});
                   return;
-                  
-             },async  error=>{ 
-              await this.ui.hideLoading();            
+
+             },async  error=>{
+              await this.ui.hideLoading();
               await this.auth.logout();
               await this.ui.alert('Notificación',error.code?? 'No conexion internet ');
              }  )
           }else{
-            await this.ui.hideLoading();            
+            await this.ui.hideLoading();
             await this.auth.logout();
-          }        
-     
-         return;      
-       } catch (error: any) { 
+          }
+
+         return;
+       } catch (error: any) {
           console.log(error)
           await this.auth.logout() ;
-          await this.ui.hideLoading();  
+          await this.ui.hideLoading();
           await this.ui.alert('Notificación',error.code?? 'Error Desconocido ');
-       }     
-     return      
-   }  
+       }
+     return
+   }
  }
- 
+
  navigateTo(url: string){
   if(this.user){
     //console.log(this.user)
     this.router.navigateByUrl(`private/${url}`,  { state:  { user: this.user }})
   }
-} 
+}
   ionViewDidLeave(){
     this.stop.next();
     this.stop.complete();

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Preferences } from '@capacitor/preferences';
 
 @Injectable({
   providedIn: 'root'
@@ -7,41 +8,41 @@ import { AlertController, LoadingController } from '@ionic/angular';
 export class UiService {
 
   constructor(private alertController: AlertController, private loadingCtrl: LoadingController) { }
-  
-  
+
+
   async alert(titulo: string, msg: string) {
     const alert = await this.alertController.create({
-      header: titulo,  
+      header: titulo,
       message: msg,
       buttons: ['Cerrar'],
-      mode:'ios' 
+      mode:'ios'
     });
 
     await alert.present();
   }
-  
+
   async showLoading( message: string) {
     const loading = await this.loadingCtrl.create({
       message ,
-      mode:'ios'  
+      mode:'ios'
     });
 
     loading.present();
   }
-  
+
  async  hideLoading(){
-     await this.loadingCtrl.dismiss({});    
+     await this.loadingCtrl.dismiss({});
   }
-  
+
   async alertOfOn(titulo: string, msg: string){
     const alert = await this.alertController.create({
-      header: titulo,  
+      header: titulo,
       message: msg,
       buttons: [
         {
           text: 'Cancelar',
           role: 'cancel',
-          handler: () => {           
+          handler: () => {
           },
         },
         {
@@ -51,12 +52,33 @@ export class UiService {
           },
         },
       ],
-      mode:'ios' 
+      mode:'ios'
     });
-    await alert.present();    
-    const res = await alert.onDidDismiss();    
-    return res.role === 'confirm'? true: false;    
+    await alert.present();
+    const res = await alert.onDidDismiss();
+    return res.role === 'confirm'? true: false;
   }
-  
-  
+
+  //local storage
+  async setDataLocalstorage(key: string, data: any){
+    console.log(data)
+     await Preferences.set({
+       key,
+       value: JSON.stringify(data)
+     })
+  }
+
+  async getDataLocalstorage(key: string){
+   const { value} =  await Preferences.get( { key });
+   return   JSON.parse(value  as string )
+
+ }
+
+ async removeDataLocalstorage(key: string){
+  await Preferences.remove({key})
+}
+
+
+
+
 }

@@ -1,6 +1,6 @@
 export interface loginAuth{
     email: string;
-    password: string 
+    password: string
 }
 
 export interface User{
@@ -17,4 +17,5 @@ export interface User{
     token: string;
     ultimaVez: number;
     avatar: string;
+    profesion: string; // ingeniro , tecnico
 }
