@@ -58,7 +58,7 @@ async  doLogin(){
                      return
                   }
                   const userdb= datos.data();
-                  await  this.ui.setDataLocalstorage('user', userdb)
+                  await  this.ui.setDataLocalstorage('user', userdb);
                   await this.router.navigateByUrl('/home', { state : { userdb}});
                   return;
 

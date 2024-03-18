@@ -20,7 +20,12 @@ export const route: Routes = [
               {
                 path: 'usuarios',
                 loadComponent : ()=> import( './usuarios/usuarios.component').then( c=>UsuariosComponent)
-              }
+              },
+
             ]
+      },
+      {
+          path: 'user-inactive',
+          loadComponent: ()=> import('./user-inactive/user-inactive.component').then(c=> c.UserInactiveComponent)
       }
 ]

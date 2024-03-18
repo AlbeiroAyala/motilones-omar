@@ -23,7 +23,7 @@ export class AuthService {
    }
    sendEmailChangePass(email?: string | undefined | null){
     if(!email){
-      return
+       throw('error email desconocido')
     }
      return this.auth.sendPasswordResetEmail(email)
    }

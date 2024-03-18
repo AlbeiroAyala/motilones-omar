@@ -4,13 +4,13 @@ import { redirectLoggedInTo, redirectUnauthorizedTo, canActivate}  from '@angula
   const redirectoLogin= ()=> redirectUnauthorizedTo(['/'])
 export const routes: Routes = [
   {
-    path: 'login',
-    loadComponent: () => import('./public/login/login.component').then((m) => m.LoginComponent),
+    path: 'public',
+    loadChildren: () => import('./public/public.routes').then( r=>r.route),
     ...canActivate (redirectoHome)
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'public',
     pathMatch: 'full',
   },
   {

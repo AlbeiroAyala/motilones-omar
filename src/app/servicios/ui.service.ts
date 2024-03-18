@@ -21,10 +21,26 @@ export class UiService {
     await alert.present();
   }
 
+
+  async alertAutoHide( msg: string) {
+    const alert = await this.loadingCtrl.create({
+      message: msg,
+      mode:'ios',
+      duration: 2000,
+      spinner: null,
+      animated: false
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+  }
+
+
   async showLoading( message: string) {
     const loading = await this.loadingCtrl.create({
       message ,
       mode:'ios'
+
     });
 
     loading.present();
@@ -61,7 +77,7 @@ export class UiService {
 
   //local storage
   async setDataLocalstorage(key: string, data: any){
-    console.log(data)
+    //console.log(data)
      await Preferences.set({
        key,
        value: JSON.stringify(data)

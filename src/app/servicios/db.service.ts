@@ -8,12 +8,15 @@ import { User } from '../interfaces/pipes/interfaces';
 export class DbService {
 
   constructor(private db:  AngularFirestore) { }
-  
+
   createUserDb(user: User){
     return this.db.collection('app_users').doc(user.uidUser).set(user)
   }
-  
+
   getUser(uid: string){
    return this.db.collection('app_users').doc(uid).get();
+  }
+  getUserValueChanges(nameCollection: string, uid: string){
+     return this.db.collection(nameCollection).doc(uid).valueChanges();
   }
 }

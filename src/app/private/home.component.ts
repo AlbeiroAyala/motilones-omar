@@ -5,6 +5,8 @@ import { IonicModule } from '@ionic/angular';
 import { UiService } from '../servicios/ui.service';
 import { AuthService } from '../servicios/auth.service';
 import { User } from '../interfaces/pipes/interfaces';
+import { DbService } from '../servicios/db.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,17 +17,40 @@ import { User } from '../interfaces/pipes/interfaces';
 })
 export class HomeComponent  implements OnInit {
    user!: User;
-  constructor(  private router: Router, private ui: UiService, private auth: AuthService) { }
+   stop$= new Subject<void>;
+  constructor(  private router: Router,
+    private ui: UiService,
+    private auth: AuthService,
+    private db: DbService
+    ) { }
 
- async  ngOnInit() {
+ async  ngOnInit() {  }
 
-   this.user=  this.router.getCurrentNavigation()?.extras?.state?.['userdb'];
-   if(!this.user){
-      //console.log('ingreso')
-      this.user = await this.ui.getDataLocalstorage('user');
+  async ionViewWillEnter(){
+    this.user=  this.router.getCurrentNavigation()?.extras?.state?.['userdb'];
+    if(!this.user){
+        this.user = await this.ui.getDataLocalstorage('user');
+    }
+     this.userChange(this.user.uidUser);
+    if(!this.user.isActive){
+      await  this.ui.setDataLocalstorage('user', this.user);
+      this.router.navigateByUrl('/home/user-inactive');
+    }
 
-   }
   }
+
+  userChange(uid: string){
+    this.db.getUserValueChanges('app_users',uid).pipe(takeUntil(this.stop$)).subscribe( async (data:any)=>{
+      console.log(data)
+       if( !data.isActive){
+          await  this.ui.setDataLocalstorage('user', data);
+          this.router.navigateByUrl('/home/user-inactive');
+       }
+ }  )
+  }
+
+
+
 
 
 
@@ -49,6 +74,9 @@ export class HomeComponent  implements OnInit {
       }
     }
 
-
+    ionViewDidLeave(){
+      this.stop$.next();
+      this.stop$.complete();
+   }
 
 }
