@@ -1,22 +1,45 @@
  <ion-header>
 
-  <ion-toolbar color="alto">
+  <ion-toolbar >
 
 
-     <ion-title color="fondo">  usuarios </ion-title>
+     <ion-title >  Usuarios Tecnicos</ion-title>
   </ion-toolbar>
  </ion-header>
  <ion-content>
-   <form class="form-inline" [formGroup]="formCreateUser" (ngSubmit)="createNewUser()">
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="staticEmail2" class="sr-only">Email</label>
-        <input formControlName="email" type="text"  class="form-control" id="staticEmail2" placeholder="email" >
-      </div>
-      <div class="form-group mx-sm-3 mb-2">
-        <label for="inputPassword2" class="sr-only">Password</label>
-        <input formControlName="password" type="text" class="form-control" id="inputPassword2" placeholder="Password">
-      </div>
-      <button [disabled]="formCreateUser.disabled" type="submit" class="btn btn-primary mb-2">Crear Usuario</button>
-    </form>
+   <div class="card mt-5 p-3 mx-3 my-3" style="height: 80vh;">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+
+          <th scope="col">Avatar</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Email</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let user of users ; index as i ">
+
+          <td> <img width="40" height="40" style="border-radius: 50%;"  [src]="user.avatar  || 'https://img.freepik.com/fotos-premium/pajaro-tucan-multicolor-gafas-sol-pico-ojos-dibujos-animados_585255-396.jpg?size=626&ext=jpg'  " /></td>
+          <td>{{ user.nombres || 'no completado'  }} </td>
+          <td>{{ user.email}} </td>
+
+          <td>
+               <div class="flex-al" >
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                <i (click)="toggleUser(user)"  *ngIf="user.isActive" class="fa fa-play"   aria-hidden="true"></i>
+                <i (click)="toggleUser(user)"  *ngIf="!user.isActive"  class="fa fa-pause" aria-hidden="true"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+
+               </div>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+   </div>
 
  </ion-content>

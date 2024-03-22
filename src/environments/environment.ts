@@ -16,7 +16,8 @@ export const environment = {
   dataApp: {
     nombreApp: 'Extra rapido los Motilones S A',
     logo: 'assets/icon/favicon.png'
-   }
+   },
+   limite: 100
 };
 
 /*

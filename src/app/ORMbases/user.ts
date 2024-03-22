@@ -19,6 +19,7 @@ export class OrmDb {
             ultimaVez: Date.now(),
             avatar: '',
             profesion: '',
+            userDelete: true
 
          }
          return data

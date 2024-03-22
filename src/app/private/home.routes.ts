@@ -9,18 +9,15 @@ export const route: Routes = [
         loadComponent : ()=> import('./home.component').then( c=>c.HomeComponent),
             children: [
               {
-                  path: 'dashboard',
-                  loadComponent : ()=> import( './dashboard/dashboard.component').then( m=> m.DashboardComponent)
+                path: 'usuarios',
+                loadComponent : ()=> import( './usuarios/usuarios.component').then( c=>UsuariosComponent)
               },
               {
                 path: '',
                 pathMatch: 'full',
-                redirectTo : 'dashboard'
+                redirectTo : 'usuarios'
               },
-              {
-                path: 'usuarios',
-                loadComponent : ()=> import( './usuarios/usuarios.component').then( c=>UsuariosComponent)
-              },
+
 
             ]
       },

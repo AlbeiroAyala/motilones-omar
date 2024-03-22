@@ -18,4 +18,5 @@ export interface User{
     ultimaVez: number;
     avatar: string;
     profesion: string; // ingeniro , tecnico
+    userDelete?: boolean; // true = activo, false= eliminado del sistema
 }

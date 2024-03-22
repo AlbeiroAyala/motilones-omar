@@ -37,11 +37,13 @@ export class HomeComponent  implements OnInit {
       this.router.navigateByUrl('/home/user-inactive');
     }
 
+    // validar si es tecnico o admin
+
   }
 
   userChange(uid: string){
     this.db.getUserValueChanges('app_users',uid).pipe(takeUntil(this.stop$)).subscribe( async (data:any)=>{
-      console.log(data)
+      //console.log(data)
        if( !data.isActive){
           await  this.ui.setDataLocalstorage('user', data);
           this.router.navigateByUrl('/home/user-inactive');

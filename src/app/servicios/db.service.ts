@@ -19,4 +19,13 @@ export class DbService {
   getUserValueChanges(nameCollection: string, uid: string){
      return this.db.collection(nameCollection).doc(uid).valueChanges();
   }
+  getUsersAll(nameCollection: string, limte : number ){
+     return this.db.collection( nameCollection, ref=>( ref.where('userDelete','==',true).limit(limte).orderBy('fechaCreate','desc')) ).get();
+  }
+
+  updateDocForOneParamBoolen(nameCollection: string,uid: string, param: boolean){
+     return  this.db.collection(nameCollection).doc(uid).update({
+      isActive : param
+     })
+   }
 }
