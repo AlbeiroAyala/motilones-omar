@@ -81,21 +81,21 @@
 	--ion-color-alto-contrast-rgb: 0,0,0;
 	--ion-color-alto-shade: #e03429;
 	--ion-color-alto-tint: #ff4f44;
-  
+
   --ion-color-medio: #e87678;
 	--ion-color-medio-rgb: 232,118,120;
 	--ion-color-medio-contrast: #000000;
 	--ion-color-medio-contrast-rgb: 0,0,0;
 	--ion-color-medio-shade: #cc686a;
 	--ion-color-medio-tint: #ea8486;
-  
+
   --ion-color-fondo: #efeff7;
 	--ion-color-fondo-rgb: 239,239,247;
 	--ion-color-fondo-contrast: #000000;
 	--ion-color-fondo-contrast-rgb: 0,0,0;
 	--ion-color-fondo-shade: #d2d2d9;
 	--ion-color-fondo-tint: #f1f1f8;
-  
+
   --ion-color-letras: #373435;
 	--ion-color-letras-rgb: 55,52,53;
 	--ion-color-letras-contrast: #ffffff;
@@ -296,4 +296,9 @@
 	--ion-color-contrast-rgb: var(--ion-color-letras-contrast-rgb);
 	--ion-color-shade: var(--ion-color-letras-shade);
 	--ion-color-tint: var(--ion-color-letras-tint);
+}
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }

@@ -4,7 +4,7 @@
  <ion-split-pane contentId="main-content">
     <ion-menu  contentId="main-content">
         <ion-header>
-            <ion-toolbar color="alto">
+            <ion-toolbar color="medio">
                 <div class="div-img">
                     <img class="img-fluid" src="../../assets/admin.png" alt="">
                 </div>
@@ -13,34 +13,35 @@
       <ion-content>
 
 
-               <ul class="list-group" style="margin-top: 10px;">
-                  <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
+               <ul class="list-group roboto-light" style="margin-top: 10px; font-size: small; ">
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('users')" >
                       <div class="div-center">
-                          <ion-icon name="people-circle-outline"></ion-icon>   <span > Usuarios </span>
+                          <ion-icon name="people-circle-outline"></ion-icon>   <span > USUARIOS </span>
                       </div>
                   </li>
 
-                  <li class="list-group-item list-group-item-action" (click)="navigateGo('equipos')" >
+                  <li class="list-group-item list-group-item-action" (click)="navigateGo('teams')" >
                       <div class="div-center">
-                          <ion-icon  name="apps-outline"></ion-icon>   <span >Equipos</span>
+                          <ion-icon  name="apps-outline"></ion-icon>   <span >EQUIPOS</span>
                       </div>
                   </li>
 
-                  <li class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
+                  <li  *ngIf="user?.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('components')" >
                       <div class="div-center">
-                          <ion-icon name="desktop-outline"></ion-icon>   <span >EQUIPOS</span>
+                          <ion-icon name="desktop-outline"></ion-icon>   <span >COMPONENTES</span>
                       </div>
                   </li>
-                  <li  *ngIf="user?.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('usuarios')" >
-                      <div class="div-center">
-                          <ion-icon name="cog-outline"></ion-icon>  <span >ACCESORIOS</span>
-                      </div>
-                  </li>
-                  <li class="list-group-item list-group-item-action" (click)="navigateGo('hgdajsdga')" >
+
+                  <li *ngIf="user?.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('informs')" >
                       <div class="div-center">
                           <ion-icon name="folder-open-outline"></ion-icon>  <span >INFORMES</span>
                       </div>
                   </li>
+                  <li *ngIf="user?.tipoUser === 'admin' " class="list-group-item list-group-item-action" (click)="navigateGo('settings')" >
+                    <div class="div-center">
+                        <ion-icon name="folder-open-outline"></ion-icon>  <span >CONFIGURACION</span>
+                    </div>
+                </li>
                   <li style="margin-top: 20px;" class="list-group-item list-group-item-action"  (click)="doLogout()" >
                       <div class="div-center">
                           <ion-icon style="color:rgb(226, 5, 5)" name="power-outline"></ion-icon> <span style="color: red;" >CERRAR SESION</span>

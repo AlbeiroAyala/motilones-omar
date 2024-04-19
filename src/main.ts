@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { NgModule, enableProdMode, importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -16,13 +16,18 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { BuscadorPipe } from './app/pipes/buscador.pipe';
 
 if (environment.production) {
   enableProdMode();
 }
 
+
+
 bootstrapApplication(AppComponent, {
+
   providers: [
+
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     importProvidersFrom(IonicModule.forRoot({}),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
@@ -31,9 +36,12 @@ bootstrapApplication(AppComponent, {
      AngularFireAuthModule,
      AngularFirestoreModule,
      AngularFireStorageModule,
+
     ),
     provideRouter(routes),
+
   ],
+
 });
 
 

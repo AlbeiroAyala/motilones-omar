@@ -1,0 +1,54 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>{{user.email}}</ion-card-title>
+    <ion-card-subtitle>{{user.tipoUser}} </ion-card-subtitle>
+      <div (click)="close()" class="position-absolute top-50 end-0 translate-middle-y mr-2">
+        <ion-button slot="end" color="danger">X</ion-button>
+      </div>
+
+  </ion-card-header>
+
+  <ion-card-content>
+     <form class="row g-3"  [formGroup]="formUser" (ngSubmit)="onsubmit()">
+
+        <div class="col-md-6">
+          <label for="inputEmail4" class="form-label">Nombres</label>
+          <input formControlName="nombres" type="text" class="form-control" id="inputEmail4">
+        </div>
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Telefono</label>
+          <input formControlName="telefono"  type="text" class="form-control" id="inputPassword4">
+        </div>
+
+        <div class="col-10">
+          <label for="inputAddress2" class="form-label">Direccion Casa</label>
+          <input formControlName="direccionCasa"  type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        </div>
+
+        <div class="col-md-2">
+          <label for="inputZip2" class="form-label">Foto</label>
+          <input formControlName="avatar"  type="text" class="form-control" id="inputZip2">
+        </div>
+        <div class="col-md-6">
+          <label for="inputCity" class="form-label">Cedula</label>
+          <input formControlName="cedula"  type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="col-md-3">
+          <label for="inputZip1" class="form-label">Fecha Nac.</label>
+          <input formControlName="fechaCumple"  type="text" class="form-control" id="inputZip1">
+        </div>
+        <div class="col-md-3">
+          <label for="inputZip" class="form-label">Profesion</label>
+          <input formControlName="profesion"  type="text" class="form-control" id="inputZip">
+        </div>
+
+        <div class="col-12 mt-3">
+          <button type="submit" [disabled]="!formUser.valid" class="btn btn-primary">Actualizar Cambios</button>
+        </div>
+
+
+
+
+     </form>
+  </ion-card-content>
+</ion-card>

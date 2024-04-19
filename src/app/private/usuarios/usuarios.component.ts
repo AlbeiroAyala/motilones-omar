@@ -1,13 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormControlName, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { loginAuth } from 'src/app/interfaces/pipes/interfaces';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { DbService } from 'src/app/servicios/db.service';
 import { UiService } from 'src/app/servicios/ui.service';
 import { environment } from 'src/environments/environment';
 import { User}  from '../../interfaces/pipes/interfaces'
+import { PhotoUserComponent } from './photo-user/photo-user.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-usuarios',
@@ -23,7 +25,8 @@ export class UsuariosComponent  implements OnInit {
   users!:  User[];
   constructor(private auth: AuthService,
      private db: DbService,
-     private ui: UiService) {
+     private ui: UiService,
+     private modal: ModalController) {
     this.formCreateUser = new FormGroup({
         email: new FormControl( '', Validators.required ),
         password: new FormControl('', Validators.required)
@@ -34,12 +37,10 @@ async   ngOnInit() {
   }
   async ionViewWillEnter(){
     this.user=   await this.auth.curretnUser();
-    console.log(this.user)
     if( this.user){
        this.users=[]
        this.getUsersAll();
     }
-    console.log(this.user)
   }
 
 
@@ -54,10 +55,9 @@ async   ngOnInit() {
          }
          data.forEach( doc=> {
              this.users.push( doc.data() as User )
-         })
-
+         });
          this.users= this.users.filter( user=> user.uidUser !== this.user.uid);
-         console.log(this.users)
+
       },async  error=>{
         await this.ui.hideLoading();
         await this.ui.alertAutoHide('Error al obtener los usuarios')
@@ -81,10 +81,45 @@ async   ngOnInit() {
           await this.ui.hideLoading();
           await this.ui.alertAutoHide('Ocurrio un error, intentalo de nuevo')
         }
-
-
-       console.log('actualizxando usueer')
      }
   }
+   async seePhotoUser(user: User ){
+       const modal = await this.modal.create({
+         component: PhotoUserComponent,
+         componentProps: {
+          user
+         }
+       });
+       await  modal.present();
+   }
 
+  async  deleteUser(userDelete: User){
+         const res = await this.ui.alertOfOn('Advertencia', 'Eliminaras un tecnico del sistema, desea continuar ?');
+         if(res){
+          try {
+             await this.ui.showLoading('eliminando....')
+             await  this.db.deleteUser('app_users', userDelete);
+             this.users=  this.users.filter(user=> user.uidUser !== userDelete.uidUser);
+             await this.ui.hideLoading();
+
+           } catch (error) {
+             await this.ui.hideLoading();
+             await  this.ui.alertAutoHide('Error al eliminar usuario, intentalo de nuevo');
+           }
+         }
+   }
+
+  async  editUser( user: User){
+    const modal = await this.modal.create( {
+       component: EditUserComponent,
+        componentProps: {
+           user
+        }
+    });
+     modal.present();
+     const  {data}  = await modal.onWillDismiss();
+     if(data){
+      this.getUsersAll();
+     }
+   }
 }

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import {  NavigationEnd, Router, RouterLink } from '@angular/router';
+import {   RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
-import { routes } from './app.routes';
+
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,9 @@ import { routes } from './app.routes';
 })
 export class AppComponent {
   public dataApp= environment.dataApp
-  
-  
-  
-  constructor() { 
+
+
+
+  constructor() {
   }
 }

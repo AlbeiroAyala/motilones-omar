@@ -1,0 +1,72 @@
+<ion-header>
+
+
+  <ion-toolbar color="medio" >
+    <ion-buttons slot="start" >
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="light"  >Lista equipos  </ion-title>
+
+  </ion-toolbar>
+ </ion-header>
+<ion-content>
+
+
+  <div class="card mt-5 p-3 mx-3 my-3 table-responsive" style="height: 80vh;">
+
+    <nav class="navbar bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Agrega nuevo equipo / componente</a>
+        <form class="d-flex" role="search">
+
+
+
+          <a routerLink="/home/new-team" data-mdb-ripple-init class="btn btn-primary"
+            style="background-color: #55acee;"  role="button">
+            <i class="fa fa-solid fa-plus me-2"></i>Nuevo</a>
+        </form>
+      </div>
+    </nav>
+
+
+    <nav class="navbar navbar-light bg-light">
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+
+      </form>
+    </nav>
+    <table class="table table-hover ">
+      <thead>
+        <tr>
+
+          <th scope="col">Nombre</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Fecha Creaacion</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr   >
+
+          <td  > <img width="40" height="40" style="border-radius: 50%;"  /></td>
+          <td></td>
+          <td> </td>
+
+          <td>
+               <div class="flex-al" >
+                <i  class="fa fa-wrench" aria-hidden="true"></i>
+                <i class="fa fa-play"   aria-hidden="true"></i>
+                <i   class="fa fa-pause" aria-hidden="true"></i>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+
+               </div>
+
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+   </div>
+
+</ion-content>

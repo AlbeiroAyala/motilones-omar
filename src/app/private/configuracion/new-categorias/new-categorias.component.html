@@ -1,0 +1,43 @@
+<ion-header>
+
+
+  <ion-toolbar color="medio" >
+    <ion-buttons slot="start" >
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <nav class="navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" >Agregar Categorias</a>
+        <form class="d-flex" role="search">
+          <a routerLink="/home/settings" data-mdb-ripple-init class="btn btn-danger"
+            role="button">
+            <i class="far fa-times-circle me-2"></i>Cerrar</a>
+        </form>
+      </div>
+    </nav>
+
+  </ion-toolbar>
+ </ion-header>
+
+
+
+
+<ion-content>
+
+
+  <div class="card mt-5 p-3 mx-3 my-3 table-responsive" style="height: 70vh;">
+
+     <nav>
+      <ul class="nav nav-tabs">
+        <li style="cursor: pointer;"  class="nav-item"  >
+          <a   class="nav-link " aria-current="page">{{ 'categoria.nombreCategoria'}} </a>
+        </li>
+
+      </ul>
+     </nav>
+
+  </div>
+
+
+
+</ion-content>

@@ -28,4 +28,23 @@ export class DbService {
       isActive : param
      })
    }
+
+   deleteUser(nameCollection: string,  user: User){
+    return  this.db.collection(nameCollection).doc(user.uidUser).update({
+      userDelete : false
+     })
+   }
+   updateDocUser(nameCollection: string,uid: string, data: any){
+    return  this.db.collection(nameCollection).doc(uid).update(
+      data
+    )
+  }
+
+  getCollection(nameCollection: string){
+     return  this.db.collection(nameCollection).get()
+  }
+
+  createDocument(nameCollection: string, data: any){
+      return this.db.collection(nameCollection).doc(data.uid).set(data);
+  }
 }

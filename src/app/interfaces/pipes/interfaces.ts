@@ -20,3 +20,10 @@ export interface User{
     profesion: string; // ingeniro , tecnico
     userDelete?: boolean; // true = activo, false= eliminado del sistema
 }
+
+export interface Categoria{
+     nombreCategoria: string;
+     isActive: boolean; // defaul true
+     uid: string;
+     fechaCreate: number;
+}
